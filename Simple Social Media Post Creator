@@ -1,0 +1,29 @@
+#Install Required Libraries
+pip install Pillow
+
+
+#reate the Social Media Post Creator
+
+from PIL import Image, ImageDraw, ImageFont
+
+def create_social_media_post(background_color, text, font_path, output_path):
+    image = Image.new('RGB', (800, 600), background_color)
+    draw = ImageDraw.Draw(image)
+    font = ImageFont.truetype(font_path, size=30)
+    text_width, text_height = draw.textsize(text, font=font)
+    x = (800 - text_width) // 2
+    y = (600 - text_height) // 2
+    draw.text((x, y), text, font=font, fill='white')
+    image.save(output_path)
+    print(f"Social media post created: {output_path}")
+
+def main():
+    background_color = (41, 128, 185)
+    text = "Hello, world! #SocialMediaPost"
+    font_path = 'arial.ttf'  # Replace with your font file path
+    output_path = 'post.png'
+
+    create_social_media_post(background_color, text, font_path, output_path)
+
+if __name__ == "__main__":
+    main()
